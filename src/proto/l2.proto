@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package packet;
+
+enum EthernetPacketType {
+    /// Internet Protocol version 4 (IPv4) \[RFC7042\].
+    EtherTypeIpv4 = 0;
+    /// Address Resolution Protocol (ARP) \[RFC7042\].
+    EtherTypeArp = 1;
+    /// Wake on Lan.
+    EtherTypeWakeOnLan = 2;
+    /// IETF TRILL Protocol \[IEEE\].
+    EtherTypeTrill = 3;
+    /// DECnet Phase IV.
+    EtherTypeDECnet = 4;
+    /// Reverse Address Resolution Protocol (RARP) \[RFC903\].
+    EtherTypeRarp = 5; 
+    /// AppleTalk - EtherTalk \[Apple\].
+    EtherTypeAppleTalk = 6;
+    /// AppleTalk Address Resolution Protocol (AARP) \[Apple\].
+    EtherTypeAarp = 7;
+    /// IPX \[Xerox\].
+    EtherTypeIpx = 8;
+    /// QNX Qnet \[QNX Software Systems\].
+    EtherTypeQnx = 9;
+    /// Internet Protocol version 6 (IPv6) \[RFC7042\].
+    EtherTypeIpv6 = 10;
+    /// Ethernet Flow Control \[IEEE 802.3x\].
+    EtherTypeFlowControl = 11;
+    /// CobraNet \[CobraNet\].
+    EtherTypeCobraNet = 12;
+    /// MPLS Unicast \[RFC 3032\].
+    EtherTypeMpls = 13;
+    /// MPLS Multicast \[RFC 5332\].
+    EtherTypeMplsMcast = 14;
+    /// PPPOE Discovery Stage \[RFC 2516\].
+    EtherTypePppoeDiscovery = 115;
+    /// PPPoE Session Stage \[RFC 2516\].
+    EtherTypePppoeSession = 16;
+    /// VLAN-tagged frame (IEEE 802.1Q).
+    EtherTypeVlan = 17;
+    /// Provider Bridging \[IEEE 802.1ad / IEEE 802.1aq\].
+    EtherTypePBridge = 18;
+    /// Link Layer Discovery Protocol (LLDP) \[IEEE 802.1AB\].
+    EtherTypeLldp = 19;
+    /// Precision Time Protocol (PTP) over Ethernet \[IEEE 1588\].
+    EtherTypePtp = 20;
+    /// CFM / Y.1731 \[IEEE 802.1ag\].
+    EtherTypeCfm = 21;
+    /// Q-in-Q Vlan Tagging \[IEEE 802.1Q\].
+    EtherTypeQinQ = 22;
+    EtherTypeUnknown = 23;
+}
+
+message L2 {
+    bytes src_mac = 1;
+    bytes dst_mac = 2;
+
+    EthernetPacketType ether_type = 3;
+}

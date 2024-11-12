@@ -1,0 +1,24 @@
+# FDPI - DPI Tool for Network Flow Protobuf Generation
+
+FDPI is a DPI (Deep Packet Inspection) tool written in Rust that generates a protobuf representation of network flows. It listens on a specified network interface, processes packets at each layer, and fills a protobuf message with the relevant information.
+
+## Features
+
+- Captures network packets on a specified interface
+- Parses packets at each layer (Ethernet, IP, TCP/UDP, etc.)
+- Generates a protobuf message representing the network flow
+- Supports customization and configuration options
+
+## Installation
+
+To use FDPI, you'll need to have Rust and Cargo installed on your system. Follow these steps to get started:
+
+1. Clone the FDPI repository: `git clone https://github.com/your-username/fdpi.git`
+2. Navigate to the project directory: `cd fdpi`
+3. Build the project: `cargo build`
+4. Run the application: `cargo run`
+
+## Usage
+
+FDPI can be used as a standalone tool or integrated into other projects. Here's an example of how to use it:
+5. Run the application with a specific interface: `cargo run <interface-name>`

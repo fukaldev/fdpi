@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+import "l2.proto";
+import "l3.proto";
+package packet;
+
+message Packet {
+    L2 l2 = 1;
+    L3 l3 = 2;
+}
