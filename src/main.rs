@@ -1,6 +1,6 @@
 extern crate pnet;
 
-use fdpi::packet::{Packet, L2, L3};
+use fdpi::packet::{Packet, L2, L3, L4};
 use pnet::datalink::{self, NetworkInterface};
 use pnet::datalink::Channel::Ethernet;
 
@@ -33,10 +33,12 @@ fn main() {
             Ok(packet_raw) => {
                 let mut packet = Packet{
                     l2: Some(L2::default()),
-                    l3: Some(L3::default())
+                    l3: Some(L3::default()),
+                    l4: Some(L4::default())
                 };
                 let result = packet.process_l2(packet_raw)
-                    .and_then(|l3_data| packet.process_l3(&l3_data));
+                    .and_then(|l3_data| packet.process_l3(&l3_data))
+                    .and_then(|l4_data| packet.process_l4(&l4_data));
                 if let Ok(_) = result {
                     println!("{:?}", packet);
                 } else {

@@ -1,5 +1,6 @@
 use super::Packet as ProtoPacket;
 use super::EthernetPacketType;
+use log::error;
 use pnet::packet::ethernet::{EtherType, EthernetPacket, EtherTypes};
 use pnet::packet::Packet;
 
@@ -63,7 +64,8 @@ impl ProtoPacket {
             self.l2.as_mut().unwrap().set_ether_type(ethertype_to_proto(ethernet_package.get_ethertype()));
             Ok(ethernet_package.payload().to_vec())
         } else {
-            Err(String::from("Error while parsing L2 package"))
+            error!("Failed to parse L2 packet");
+            Err(String::from("Failed to parse L2 packet"))
         }
     }
 

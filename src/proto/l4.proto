@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package packet;
+
+message L4 {
+  uint32 src_port = 1;
+  uint32 dst_port = 2;
+}

@@ -2,9 +2,12 @@ syntax = "proto3";
 
 import "l2.proto";
 import "l3.proto";
+import "l4.proto";
+
 package packet;
 
 message Packet {
     L2 l2 = 1;
     L3 l3 = 2;
+    L4 l4 = 3;
 }

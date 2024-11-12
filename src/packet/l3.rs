@@ -1,6 +1,6 @@
 use pnet::packet::{ip::IpNextHeaderProtocol, ipv4::Ipv4Packet, Packet};
 use super::{EthernetPacketType, Packet as ProtoPacket, ProtocolType};
-use log::{debug, info, warn};
+use log::{debug, error, info, warn};
 
 fn protocol_to_proto(next_protocol: IpNextHeaderProtocol) -> Result<ProtocolType, String> {
     if let Ok(protocol_type) = ProtocolType::try_from(next_protocol.0 as i32) {
@@ -19,15 +19,14 @@ impl ProtoPacket {
             self.l3.as_mut().unwrap().src_ip = ipv4_packet.get_source().octets().to_vec();
             Ok(ipv4_packet.payload().to_vec())
         } else {
-            Err(String::from("Error while parsing ipv4 packet"))
+            error!("Failed to parse L3:IPv4 packet");
+            Err(String::from("Failed to parse L3:IPv4 packet"))
         }
         
     }
 
     pub fn process_l3(&mut self, packet: &[u8]) -> Result<Vec<u8>, String> {
         let ether_type: EthernetPacketType = self.l2.as_ref().unwrap().ether_type();
-        println!("Furkan L3 {}", ether_type.as_str_name());
-        debug!("EtherType: {}", ether_type.as_str_name());
         match ether_type {
             EthernetPacketType::EtherTypeIpv4 => self.process_ipv4(packet),
             EthernetPacketType::EtherTypeArp => Err(String::from("Not yet implemented")),
